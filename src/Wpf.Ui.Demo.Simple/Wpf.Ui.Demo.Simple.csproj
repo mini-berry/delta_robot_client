@@ -2,14 +2,20 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>applicationIcon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Assets\applicationIcon-1024.png" />
+    <Content Remove="Assets\applicationIcon-256.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="applicationIcon.ico" />
@@ -27,11 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\applicationIcon-1024.png" />
-    <Resource Include="Assets\applicationIcon-256.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="LibVLCSharp" />
+    <PackageReference Include="LibVLCSharp.WPF" />
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -40,6 +43,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\applicationIcon-1024.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\applicationIcon-256.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
