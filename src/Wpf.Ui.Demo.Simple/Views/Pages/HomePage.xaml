@@ -1,34 +1,140 @@
-<Page
-    x:Class="Wpf.Ui.Demo.Simple.Views.Pages.HomePage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Demo.Simple.Views.Pages"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="DashboardPage"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+<Page 
+    x:Class="Wpf.Ui.Demo.Simple.Views.Pages.HomePage" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:Wpf.Ui.Demo.Simple.Views.Pages" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+    Title="HomePage" 
+    d:DesignHeight="700" 
+    d:DesignWidth="750" 
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}" 
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}" 
     mc:Ignorable="d">
-
-    <Grid Margin="42" VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <ui:Button
-            Grid.Column="0"
-            Click="OnBaseButtonClick"
-            Content="Click me!"
-            Icon="{ui:SymbolIcon Fluent24}" />
-        <TextBlock
-            x:Name="CounterTextBlock"
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center" />
+    <Grid Margin="42,10,42,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--title图-->
+        <Border Grid.Row="0" Height="200" CornerRadius="8">
+            <Border.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpg" RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill" />
+            </Border.Background>
+            <Border CornerRadius="10">
+                <Border.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#1F000000" />
+                        <GradientStop Offset="1" Color="#4F000000" />
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Margin="48,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent">
+                        <ui:TextBlock FontTypography="Title" Foreground="#FFFFFF" Text="控制系统" />
+                        <ui:TextBlock FontTypography="Subtitle" Foreground="#B7FFFFFF" Text="手眼模式delta机械臂" />
+                        <ui:TextBlock FontTypography="BodyStrong" Foreground="#B7FFFFFF" Text="@Mini-Berry" />
+                    </StackPanel>
+                    <ui:TextBlock Margin="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontTypography="Caption" Foreground="#57FFFFFF" />
+                </Grid>
+            </Border>
+        </Border>
+        <Grid Margin="0,20,0,0" VerticalAlignment="Top" Grid.Row="1">
+            <TextBlock Text="连接到主机" FontSize="20" FontWeight="Heavy"/>
+        </Grid>
+        <!--控件布局-->
+        <Grid Margin="20" VerticalAlignment="Top" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--连接布局-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Cursor="">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="0" Margin="0,0,15,0">
+                        <ui:TextBox x:Name="ipAddr" PlaceholderText="IP地址" Height="30" ClearButtonEnabled ="True"/>
+                    </Border>
+                    <Border Grid.Column="1" Margin="0,0,5,0">
+                        <ui:TextBox x:Name="portNum" PlaceholderText="端口" Height="30" ClearButtonEnabled ="True"/>
+                    </Border>
+                    <Border Grid.Column="2" Margin="0" HorizontalAlignment="Right" >
+                        <ui:Button x:Name="connectButoon" Margin="0,0,5,0" Grid.Column="2" Appearance="Primary" Content="连接" Height="30"  Width="85" Click="ConnectButoon_Click"/>
+                    </Border>
+                </Grid>
+                <!--三个盒子布局-->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:CardAction Grid.Row="0" Grid.Column="0" Margin="0,0,4,0" Padding="0" VerticalAlignment="Stretch" CommandParameter="BasicInput" IsChevronVisible="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="40" Height="120" Margin="15,0,0,0" Source="pack://application:,,,/Assets/Auto.png" />
+                            <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Center">
+                                <ui:TextBlock Margin="0" FontTypography="BodyStrong" Text="自动模式" TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock Appearance="Secondary" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="自动识别和测试" TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </Grid>
+                    </ui:CardAction>
+                    <ui:CardAction Grid.Row="0" Grid.Column="1" Margin="0,0,4,0" Padding="0" VerticalAlignment="Stretch" CommandParameter="BasicInput" IsChevronVisible="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="40" Height="120" Margin="15,0,0,0" Source="pack://application:,,,/Assets/Hand.png" />
+                            <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Center">
+                                <ui:TextBlock Margin="0" FontTypography="BodyStrong" Text="手动模式" TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock Appearance="Secondary" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="手动控制位置" TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </Grid>
+                    </ui:CardAction>
+                    <ui:CardAction Grid.Row="0" Grid.Column="2" Margin="0,0,4,0" Padding="0" VerticalAlignment="Stretch" CommandParameter="BasicInput" IsChevronVisible="False">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="40" Height="120" Margin="15,0,0,0" Source="pack://application:,,,/Assets/Camera.png" />
+                            <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Center">
+                                <ui:TextBlock Margin="0" FontTypography="BodyStrong" Text="视频模式" TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock Appearance="Secondary" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="查看摄像头视频" TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </Grid>
+                    </ui:CardAction>
+                </Grid>
+            </Grid>
+                <!--右侧链接布局-->
+            <Grid Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ui:HyperlinkButton VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0" Content="帮助" Icon="{ui:SymbolIcon ChatHelp24}" NavigateUri="https://www.github.com/" />
+                <ui:HyperlinkButton VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Content="反馈" Icon="{ui:SymbolIcon PersonFeedback24}" NavigateUri="https://www.github.com/" />
+            </Grid>
+        </Grid>
     </Grid>
-</Page>
+</Page> 

@@ -3,9 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using LibVLCSharp.Platforms.Windows;
+using LibVLCSharp.Shared;
+using LibVLCSharp.WPF;
 using System;
 using System.Collections.ObjectModel;
-using System.Windows.Media;
 using Wpf.Ui.Demo.Simple.Models;
 
 namespace Wpf.Ui.Demo.Simple.Views.Pages;
@@ -13,35 +15,22 @@ namespace Wpf.Ui.Demo.Simple.Views.Pages;
 /// <summary>
 /// Interaction logic for DataView.xaml
 /// </summary>
+
 public partial class VideoPage
 {
-    public ObservableCollection<DataColor> ColorsCollection = new();
-
+    private LibVLC _libVLC;
+    private LibVLCSharp.Shared.MediaPlayer _mediaPlayer;
     public VideoPage()
     {
-        InitializeData();
         InitializeComponent();
+        Core.Initialize();
+        _libVLC = new LibVLC();
+        _mediaPlayer = new MediaPlayer(_libVLC);
+        videoStream.MediaPlayer = _mediaPlayer;
 
-        ColorsItemsControl.ItemsSource = ColorsCollection;
-    }
-
-    private void InitializeData()
-    {
-        var random = new Random();
-
-        for (int i = 0; i < 8192; i++)
-            ColorsCollection.Add(
-                new DataColor
-                {
-                    Color = new SolidColorBrush(
-                        Color.FromArgb(
-                            (byte)200,
-                            (byte)random.Next(0, 250),
-                            (byte)random.Next(0, 250),
-                            (byte)random.Next(0, 250)
-                        )
-                    )
-                }
-            );
+        // 设置视频文件路径
+        var media = new Media(_libVLC, new Uri("D:/v.mp4"));
+        _mediaPlayer.Play(media);
     }
 }
+ 

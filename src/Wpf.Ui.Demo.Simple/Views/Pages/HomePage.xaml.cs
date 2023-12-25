@@ -12,7 +12,6 @@ namespace Wpf.Ui.Demo.Simple.Views.Pages;
 /// </summary>
 public partial class HomePage
 {
-    private int _counter = 0;
 
     public HomePage()
     {
@@ -29,14 +28,14 @@ public partial class HomePage
             Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance. ApplicationTheme.Light);
         }
 
-        CounterTextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, _counter.ToString());
     }
 
-    private void OnBaseButtonClick(object sender, RoutedEventArgs e)
+    private void ConnectButoon_Click(object sender, RoutedEventArgs e)
     {
-        CounterTextBlock.SetCurrentValue(
-            System.Windows.Controls.TextBlock.TextProperty,
-            (++_counter).ToString()
-        );
+        connectButoon.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, "连接中");
+    }
+    private void ConnectTo()
+    { 
+    string ipAddr=ipAddr.ToCharArray;
     }
 }
