@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using Wpf.Ui.Appearance;
 
-namespace Wpf.Ui.Demo.Simple.Views.Pages;
+namespace Wpf.Ui.Paper.Views.Pages;
 
 /// <summary>
 /// Interaction logic for SettingsPage.xaml

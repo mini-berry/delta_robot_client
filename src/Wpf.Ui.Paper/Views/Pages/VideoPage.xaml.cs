@@ -8,18 +8,18 @@ using LibVLCSharp.Shared;
 using LibVLCSharp.WPF;
 using System;
 using System.Collections.ObjectModel;
-using Wpf.Ui.Demo.Simple.Models;
+using Wpf.Ui.Paper.Models;
 
-namespace Wpf.Ui.Demo.Simple.Views.Pages;
+namespace Wpf.Ui.Paper.Views.Pages;
 
 /// <summary>
 /// Interaction logic for DataView.xaml
 /// </summary>
-
 public partial class VideoPage
 {
-    private LibVLC _libVLC;
-    private LibVLCSharp.Shared.MediaPlayer _mediaPlayer;
+    private readonly LibVLC _libVLC;
+    private readonly LibVLCSharp.Shared.MediaPlayer _mediaPlayer;
+
     public VideoPage()
     {
         InitializeComponent();
@@ -30,7 +30,6 @@ public partial class VideoPage
 
         // 设置视频文件路径
         var media = new Media(_libVLC, new Uri("D:/v.mp4"));
-        _mediaPlayer.Play(media);
+        _ = _mediaPlayer.Play(media);
     }
 }
- 

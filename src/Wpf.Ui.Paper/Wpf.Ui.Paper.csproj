@@ -10,6 +10,7 @@
     <ApplicationIcon>applicationIcon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <StartupObject>Wpf.Ui.Paper.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,13 +60,22 @@
     <Content Update="Assets\Auto.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="Assets\Auto2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\Camera.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="Assets\Camera2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\Hand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Hand2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

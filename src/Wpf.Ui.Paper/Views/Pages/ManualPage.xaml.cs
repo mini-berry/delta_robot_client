@@ -5,28 +5,16 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Demo.Simple.Views.Pages;
+namespace Wpf.Ui.Paper.Views.Pages;
 
 /// <summary>
 /// Interaction logic for DashboardPage.xaml
 /// </summary>
 public partial class ManualPage
 {
-    private int _counter = 0;
-
     public ManualPage()
     {
         DataContext = this;
         InitializeComponent();
-
-        CounterTextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, _counter.ToString());
-    }
-
-    private void OnBaseButtonClick(object sender, RoutedEventArgs e)
-    {
-        CounterTextBlock.SetCurrentValue(
-            System.Windows.Controls.TextBlock.TextProperty,
-            (++_counter).ToString()
-        );
     }
 }
