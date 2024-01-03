@@ -16,5 +16,26 @@ public partial class AutoPage
     {
         DataContext = this;
         InitializeComponent();
+        Loaded += (_, _) => NotConnectDialog();
+    }
+
+    public void NotConnectDialog()
+    {
+        var currentWindow = (MainWindow)Window.GetWindow(this);
+        if (currentWindow._isConnected == false)
+        {
+            var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "请先连接",
+                Content = "需要连接到客户端。",
+                CloseButtonText = "确认",
+            };
+            _ = uiMessageBox.ShowDialogAsync();
+        }
+    }
+
+    private void AutoButton_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

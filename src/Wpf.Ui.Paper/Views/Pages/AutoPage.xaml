@@ -13,5 +13,7 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    
+    <StackPanel Margin="42">
+        <ui:Button x:Name="autoButoon" Margin="0" Grid.Column="2" Appearance="Primary" Content="连接" Height="200"  Width="400" Click="AutoButton_Click"/>
+    </StackPanel>
 </Page>

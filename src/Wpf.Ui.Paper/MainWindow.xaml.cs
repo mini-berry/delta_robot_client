@@ -6,12 +6,17 @@
 using SharpDX.Win32;
 using System;
 using System.IO;
+using System.Windows;
+using System.Windows.Threading;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 using Windows.Media.Protection.PlayReady;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Paper.Views.Pages;
+using System.Threading;
+using System.Windows.Markup;
+using System.Xml.Linq;
 
 namespace Wpf.Ui.Paper;
 
@@ -24,6 +29,7 @@ public partial class MainWindow
     private bool _isUserClosedPane;
     public bool _isConnected=false;
     public TcpClient tcpClient;
+    public XyzType XyzData;
 
     public double? TcpPort { get; set; }
 
@@ -38,6 +44,32 @@ public partial class MainWindow
         Appearance.SystemThemeWatcher.Watch(this);
         Loaded += (_, _) => RootNavigation.Navigate(typeof(HomePage));
         _isConnected = false;
+
+        XyzData = new XyzType();
+
+        var timer = new DispatcherTimer();
+        timer.Interval = TimeSpan.FromSeconds(1.0);
+        timer.Tick += new EventHandler(Timer_Tick);
+        timer.Start();
+    }
+
+    private void Timer_Tick(object sender, EventArgs e)
+    {
+        if (_isConnected == true)
+        {
+            NetworkStream stream = tcpClient.GetStream();
+            if (stream.DataAvailable)
+            {
+                var buffer = new byte[256];
+                var bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                var values = receivedData.TrimEnd(';').Split(',');
+                if (values.Length == 6)
+                {
+                    XyzData.SetData(values);
+                }
+            }
+        }
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

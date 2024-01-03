@@ -102,7 +102,6 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
                     connectButoon.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, "连接");
                     var uiMessageBox = new Wpf.Ui.Controls.MessageBox
                     {
-                        
                         Title = "连接失败",
                         Content = "请检查IP地址和端口信息。",
                         CloseButtonText = "确认",

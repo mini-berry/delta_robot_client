@@ -9,7 +9,7 @@ using LibVLCSharp.WPF;
 using System;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Paper.Models;
-
+using System.Windows;
 namespace Wpf.Ui.Paper.Views.Pages;
 
 /// <summary>
@@ -30,6 +30,21 @@ public partial class VideoPage
 
         // 设置视频文件路径
         var media = new Media(_libVLC, new Uri("D:/v.mp4"));
-        _ = _mediaPlayer.Play(media);
+        Loaded += (_, _) => NotConnectDialog();
+    }
+
+    public void NotConnectDialog()
+    {
+        var currentWindow = (MainWindow)Window.GetWindow(this);
+        if (currentWindow._isConnected == false)
+        {
+            var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "请先连接",
+                Content = "需要连接到客户端。",
+                CloseButtonText = "确认",
+            };
+            _ = uiMessageBox.ShowDialogAsync();
+        }
     }
 }

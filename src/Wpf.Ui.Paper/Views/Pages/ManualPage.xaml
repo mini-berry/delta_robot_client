@@ -62,13 +62,13 @@
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Border                >
-                    <ui:TextBox Margin="0,10,20,0" Height="35"/>
+                    <ui:TextBox x:Name="xTextBox" Margin="0,10,20,0" Height="35" IsEnabled="False"/>
                 </Border>
                 <Border>
-                    <ui:TextBox Margin="0,10,20,0" Height="35"/>
+                    <ui:TextBox x:Name="yTextBox" Margin="0,10,20,0" Height="35" IsEnabled="False"/>
                 </Border>
                 <Border>
-                    <ui:TextBox Margin="0,10,20,0" Height="35"/>
+                    <ui:TextBox x:Name="zTextBox" Margin="0,10,20,0" Height="35" IsEnabled="False"/>
                 </Border>
             </StackPanel>
         </Grid>
@@ -90,32 +90,32 @@
         FontSize="20"
         FontWeight="Medium"
         Margin="10,15,10,0"
-        Text="X" 
+        Text="A" 
         Height="35"/>
                 <TextBlock 
         Width="20"
         FontSize="20"
         FontWeight="Medium"
-        Text="Y"
+        Text="B"
         Margin="10,10,10,0"
         Height="35"/>
                 <TextBlock 
         Width="20"
         FontSize="20"
         FontWeight="Medium"
-        Text="Z" 
+        Text="C" 
         Margin="10,10,10,0"
         Height="35"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Border                >
-                    <ui:TextBox Margin="0,10,10,0" Height="35"/>
+                    <ui:TextBox x:Name="aTextBox" Margin="0,10,10,0" Height="35" IsEnabled="False"/>
                 </Border>
                 <Border>
-                    <ui:TextBox Margin="0,10,10,0" Height="35"/>
+                    <ui:TextBox x:Name="bTextBox" Margin="0,10,10,0" Height="35" IsEnabled="False"/>
                 </Border>
                 <Border>
-                    <ui:TextBox Margin="0,10,10,0" Height="35"/>
+                    <ui:TextBox x:Name="cTextBox" Margin="0,10,10,0" Height="35" IsEnabled="False"/>
                 </Border>
             </StackPanel>
         </Grid>
