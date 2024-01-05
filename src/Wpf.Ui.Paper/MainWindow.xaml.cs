@@ -3,20 +3,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using SharpDX.Win32;
 using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Threading;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows;
-using Windows.Media.Protection.PlayReady;
+using System.Windows.Threading;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Paper.Views.Pages;
-using System.Threading;
-using System.Windows.Markup;
-using System.Xml.Linq;
 
 namespace Wpf.Ui.Paper;
 
@@ -27,9 +20,12 @@ public partial class MainWindow
 {
     private bool _isPaneOpenedOrClosedFromCode;
     private bool _isUserClosedPane;
-    public bool _isConnected=false;
-    public TcpClient tcpClient;
-    public XyzType XyzData;
+
+    public bool IsConnected { get; set; }
+
+    public TcpClient? TcpClient { get; set; }
+
+    public XyzType XyzData { get; set; }
 
     public double? TcpPort { get; set; }
 
@@ -43,7 +39,8 @@ public partial class MainWindow
 
         Appearance.SystemThemeWatcher.Watch(this);
         Loaded += (_, _) => RootNavigation.Navigate(typeof(HomePage));
-        _isConnected = false;
+        Closing += (_, _) => TcpDispose();
+        IsConnected = false;
 
         XyzData = new XyzType();
 
@@ -53,11 +50,11 @@ public partial class MainWindow
         timer.Start();
     }
 
-    private void Timer_Tick(object sender, EventArgs e)
+    private void Timer_Tick(object? sender, EventArgs e)
     {
-        if (_isConnected == true)
+        if (TcpClient != null && IsConnected == true)
         {
-            NetworkStream stream = tcpClient.GetStream();
+            NetworkStream stream = TcpClient.GetStream();
             if (stream.DataAvailable)
             {
                 var buffer = new byte[256];
@@ -104,43 +101,67 @@ public partial class MainWindow
         _isUserClosedPane = true;
     }
 
-    public bool ConnectTo(string serverIp, double? serverPort)
+    public bool ConnectTo(string serverIp, double serverPort)
     {
-        if(_isConnected)
+        if(TcpClient != null && IsConnected)
         {
-            tcpClient.Dispose();
-            _isConnected = false;
+            TcpClient.Dispose();
+            IsConnected = false;
         }
 
         try
         {
-            tcpClient = new TcpClient();
+            TcpClient = new TcpClient();
 
             // 连接到服务器
-            if (!tcpClient.ConnectAsync(serverIp, (int)serverPort).Wait(1000))
+            if (!TcpClient.ConnectAsync(serverIp, (int)serverPort).Wait(1000))
             {
                 return false;
             }
 
-            if (tcpClient.Connected && tcpClient.GetStream().CanRead)
+            if (TcpClient.Connected && TcpClient.GetStream().CanRead)
             {
-                _isConnected = true;
+                IsConnected = true;
             }
             else
             {
                 return false;
             }
 
-            var messageToSend = "Hello";
+            var messageToSend = "C;";
             var dataToSend = Encoding.UTF8.GetBytes(messageToSend);
-            tcpClient.GetStream().Write(dataToSend, 0, dataToSend.Length);
+            TcpClient.GetStream().Write(dataToSend, 0, dataToSend.Length);
             return true;
         }
         catch (Exception)
         {
-            _isConnected = false;
+            IsConnected = false;
             return false;
         }
+    }
+
+    public void SendString(string message)
+    {
+        if (TcpClient != null && TcpClient.Connected && TcpClient.GetStream().CanWrite)
+        {
+            var dataToSend = Encoding.UTF8.GetBytes(message);
+            TcpClient.GetStream().Write(dataToSend, 0, dataToSend.Length);
+        }
+        else
+        {
+            var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = "请先连接",
+                Content = "需要连接到客户端。",
+                CloseButtonText = "确认",
+            };
+            _ = uiMessageBox.ShowDialogAsync();
+        }
+    }
+
+    public void TcpDispose()
+    {
+        TcpClient?.Dispose();
     }
 }
 

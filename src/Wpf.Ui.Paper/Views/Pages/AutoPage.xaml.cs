@@ -22,7 +22,7 @@ public partial class AutoPage
     public void NotConnectDialog()
     {
         var currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected == false)
+        if (currentWindow.IsConnected == false)
         {
             var uiMessageBox = new Wpf.Ui.Controls.MessageBox
             {
@@ -36,6 +36,10 @@ public partial class AutoPage
 
     private void AutoButton_Click(object sender, RoutedEventArgs e)
     {
-
+        var currentWindow = (MainWindow)Window.GetWindow(this);
+        if(currentWindow != null)
+        {
+            currentWindow.SendString("S;");
+        }
     }
 }

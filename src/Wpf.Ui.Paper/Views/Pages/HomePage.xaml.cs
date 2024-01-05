@@ -38,7 +38,7 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Auto2.png"));
     private readonly ImageSource manualMode_ImageSource2 =
 new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
 
-    private List<string> _suggestionList;
+    private readonly List<string> _suggestionList;
     private MainWindow currentWindow;
 
     public HomePage()
@@ -68,10 +68,10 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
     private void ConnectButoon_Click(object sender, RoutedEventArgs e)
     {
         currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected)
+        if (currentWindow.TcpClient != null && currentWindow.IsConnected)
         {
-            currentWindow.tcpClient.Dispose();
-            currentWindow._isConnected = false;
+            currentWindow.TcpClient.Dispose();
+            currentWindow.IsConnected = false;
             connectButoon.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, "连接");
             connectButoon.SetCurrentValue(System.Windows.Controls.Control.BackgroundProperty, FindResource("AccentButtonBackground"));
             CameraMode_IMG.SetCurrentValue(System.Windows.Controls.Image.SourceProperty, cameraMode_ImageSource2);
@@ -89,7 +89,7 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
 
                 connectButoon.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, "连接中");
 
-                if (currentWindow.ConnectTo(ipAddr.Text, portNum.Value))
+                if (portNum.Value != null && currentWindow.ConnectTo(ipAddr.Text, (double)portNum.Value))
                 {
                     connectButoon.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, "断开");
                     connectButoon.SetCurrentValue(System.Windows.Controls.Control.BackgroundProperty, new SolidColorBrush(Colors.Green));
@@ -131,7 +131,7 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
     private void AutoMode_Click(object sender, RoutedEventArgs e)
     {
         currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected)
+        if (currentWindow.IsConnected)
         {
             _ = currentWindow.RootNavigation.Navigate(typeof(AutoPage));
         }
@@ -140,7 +140,7 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
     private void ManualMode_Click(object sender, RoutedEventArgs e)
     {
         currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected)
+        if (currentWindow.IsConnected)
         {
             _ = currentWindow.RootNavigation.Navigate(typeof(ManualPage));
         }
@@ -149,7 +149,7 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
     private void CameraMode_Click(object sender, RoutedEventArgs e)
     {
         currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected)
+        if (currentWindow.IsConnected)
         {
             _ = currentWindow.RootNavigation.Navigate(typeof(VideoPage));
         }

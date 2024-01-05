@@ -10,6 +10,7 @@ using System;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Paper.Models;
 using System.Windows;
+
 namespace Wpf.Ui.Paper.Views.Pages;
 
 /// <summary>
@@ -36,7 +37,7 @@ public partial class VideoPage
     public void NotConnectDialog()
     {
         var currentWindow = (MainWindow)Window.GetWindow(this);
-        if (currentWindow._isConnected == false)
+        if (currentWindow.IsConnected == false)
         {
             var uiMessageBox = new Wpf.Ui.Controls.MessageBox
             {
