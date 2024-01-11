@@ -27,6 +27,8 @@ public partial class MainWindow
 
     public XyzType XyzData { get; set; }
 
+    public XyzType XyzData2 { get; set; }
+
     public double? TcpPort { get; set; }
 
     public string? TcpIP { get; set; }
@@ -43,6 +45,7 @@ public partial class MainWindow
         IsConnected = false;
 
         XyzData = new XyzType();
+        XyzData2 = new XyzType();
 
         var timer = new DispatcherTimer();
         timer.Interval = TimeSpan.FromSeconds(1.0);

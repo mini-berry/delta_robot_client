@@ -67,15 +67,15 @@ public partial class ManualPage
         if (!String.IsNullOrEmpty(aMTextBox.Text) &&
             !String.IsNullOrEmpty(bMTextBox.Text) &&
             !String.IsNullOrEmpty(cMTextBox.Text) &&
-            Double.TryParse(aMTextBox.Text, out currentWindow.XyzData.XAngel) &&
-            Double.TryParse(bMTextBox.Text, out currentWindow.XyzData.YAngel) &&
-            Double.TryParse(cMTextBox.Text, out currentWindow.XyzData.ZAngel) &&
+            Double.TryParse(aMTextBox.Text, out currentWindow.XyzData2.XAngel) &&
+            Double.TryParse(bMTextBox.Text, out currentWindow.XyzData2.YAngel) &&
+            Double.TryParse(cMTextBox.Text, out currentWindow.XyzData2.ZAngel) &&
             currentWindow != null
             )
         {
-            currentWindow.SendString("A" + currentWindow.XyzData.XAngel.ToString() + ","
-                + currentWindow.XyzData.YAngel.ToString() + "," +
-                currentWindow.XyzData.ZAngel.ToString() + ";");
+            currentWindow.SendString("A" + currentWindow.XyzData2.XAngel.ToString() + ","
+                + currentWindow.XyzData2.YAngel.ToString() + "," +
+                currentWindow.XyzData2.ZAngel.ToString() + ";");
         }
         else
         {
@@ -95,15 +95,15 @@ public partial class ManualPage
         if (!String.IsNullOrEmpty(xMTextBox.Text) &&
             !String.IsNullOrEmpty(yMTextBox.Text) &&
             !String.IsNullOrEmpty(zMTextBox.Text) &&
-            Double.TryParse(xMTextBox.Text, out currentWindow.XyzData.XPos) &&
-            Double.TryParse(yMTextBox.Text, out currentWindow.XyzData.YPos) &&
-            Double.TryParse(zMTextBox.Text, out currentWindow.XyzData.ZPos) &&
+            Double.TryParse(xMTextBox.Text, out currentWindow.XyzData2.XPos) &&
+            Double.TryParse(yMTextBox.Text, out currentWindow.XyzData2.YPos) &&
+            Double.TryParse(zMTextBox.Text, out currentWindow.XyzData2.ZPos) &&
             currentWindow != null
             )
         {
-            currentWindow.SendString("P" + currentWindow.XyzData.XPos.ToString() + ","
-                + currentWindow.XyzData.YPos.ToString() + "," +
-                currentWindow.XyzData.ZPos.ToString() + ";");
+            currentWindow.SendString("P" + currentWindow.XyzData2.XPos.ToString() + ","
+                + currentWindow.XyzData2.YPos.ToString() + "," +
+                currentWindow.XyzData2.ZPos.ToString() + ";");
         }
         else
         {
