@@ -4,6 +4,7 @@
 
 #user
 pub/
+Output/
 
 # DocFX
 docs/api/
