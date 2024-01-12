@@ -40,6 +40,7 @@ public partial class MainWindow
         InitializeComponent();
 
         Appearance.SystemThemeWatcher.Watch(this);
+
         Loaded += (_, _) => RootNavigation.Navigate(typeof(HomePage));
         Closing += (_, _) => TcpDispose();
         IsConnected = false;

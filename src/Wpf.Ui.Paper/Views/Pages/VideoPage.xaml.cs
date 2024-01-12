@@ -16,7 +16,7 @@ namespace Wpf.Ui.Paper.Views.Pages;
 /// <summary>
 /// Interaction logic for DataView.xaml
 /// </summary>
-public partial class VideoPage
+public partial class VideoPage : IDisposable
 {
     private readonly LibVLC _libVLC;
     private readonly LibVLCSharp.Shared.MediaPlayer _mediaPlayer;
@@ -47,5 +47,22 @@ public partial class VideoPage
             };
             _ = uiMessageBox.ShowDialogAsync();
         }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            // 释放托管资源
+        }
+
+        _mediaPlayer.Dispose();
+        _libVLC.Dispose();
     }
 }

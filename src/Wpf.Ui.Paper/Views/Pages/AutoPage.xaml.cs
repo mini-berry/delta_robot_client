@@ -37,7 +37,7 @@ public partial class AutoPage
     private void AutoButton_Click(object sender, RoutedEventArgs e)
     {
         var currentWindow = (MainWindow)Window.GetWindow(this);
-        if(currentWindow != null)
+        if (currentWindow != null)
         {
             currentWindow.SendString("S;");
         }

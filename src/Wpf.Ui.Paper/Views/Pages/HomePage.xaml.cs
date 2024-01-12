@@ -45,15 +45,15 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
     {
         _suggestionList =
             [
-                "192.168.",
                 "127.0.0.1"
             ];
+        _suggestionList.Insert(0, Properties.Settings.Default.IP);
         DataContext = this;
-
         InitializeComponent();
         currentWindow = (MainWindow)Window.GetWindow(this);
         ipAddr.OriginalItemsSource = _suggestionList;
-        portNum.Value = 8000;
+        ipAddr.Text = Properties.Settings.Default.IP;
+        portNum.Value = Properties.Settings.Default.portNum;
 
         if (Appearance.ApplicationThemeManager.GetAppTheme() == Wpf.Ui.Appearance.ApplicationTheme.Dark)
         {
@@ -67,6 +67,17 @@ new BitmapImage(new Uri("pack://application:,,,/Assets/Hand2.png"));
 
     private void ConnectButoon_Click(object sender, RoutedEventArgs e)
     {
+        if (!String.IsNullOrEmpty(ipAddr.Text))
+        {
+            if (portNum.Value != null)
+            {
+                Properties.Settings.Default.portNum = (double)portNum.Value;
+            }
+
+            Properties.Settings.Default.IP = ipAddr.Text;
+            Properties.Settings.Default.Save();
+        }
+
         currentWindow = (MainWindow)Window.GetWindow(this);
         if (currentWindow.TcpClient != null && currentWindow.IsConnected)
         {
