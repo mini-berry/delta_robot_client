@@ -2,6 +2,7 @@
 主界面
 
 [![pkxPFoQ.md.png](https://s21.ax1x.com/2024/08/06/pkxPFoQ.md.png)](https://imgse.com/i/pkxPFoQ)
+
 实现了大小自适应和左侧栏展开，夜间模式
 
 [![pkxPWm8.md.png](https://s21.ax1x.com/2024/08/06/pkxPWm8.md.png)](https://imgse.com/i/pkxPWm8)
